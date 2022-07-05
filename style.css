@@ -1,0 +1,297 @@
+@media (min-width: 1280px) {
+
+    #main {
+        margin-left: 33%;
+        margin-top: 60px;
+        background-color: Gainsboro;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        border-radius: 25px;
+    }
+
+    #alert {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 75px 150px;
+        border-radius: 10px;
+        background-color: white;
+    }
+
+    .modal-fade {
+        width: 100%;
+        min-height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        position: fixed;
+        top: 0px;
+        display: none;
+    }
+
+    .alert-btn {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #047857;
+        padding: 5px 50px;
+        border-radius: 10px;
+    }
+
+    .form-row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .form-row>.col,
+    .form-row>[class*=col-] {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .rdbtn {
+        padding-left: 30px;
+    }
+
+    #radio1 {
+        margin-right: 5px;
+    }
+
+    #radio2 {
+        margin-right: 5px;
+    }
+
+    #radio3 {
+        margin-right: 5px;
+    }
+
+    #radio4 {
+        margin-right: 2px;
+    }
+
+    #radio5 {
+        margin-right: 5px;
+    }
+
+    #radio10 {
+        margin-right: 5px;
+    }
+
+    #radio11 {
+        margin-right: 5px;
+    }
+
+    .custom-control.custom-radio.custom-control-inline {
+        width: auto;
+        padding-left: 40px;
+        margin-right: 10px;
+    }
+
+    #successblock {
+        background-color: #28a745;
+        margin-top: 16px;
+        max-width: 335px;
+        border-radius: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: white;
+    }
+}
+
+@media (min-width: 992px) {
+
+    #main {
+        margin-left: 33%;
+        margin-top: 60px;
+        background-color: Gainsboro;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        border-radius: 25px;
+    }
+
+    #alert {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 75px 150px;
+        border-radius: 10px;
+        background-color: white;
+    }
+
+    .modal-fade {
+        width: 100%;
+        min-height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        position: fixed;
+        top: 0px;
+        display: none;
+    }
+
+    .alert-btn {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #047857;
+        padding: 5px 50px;
+        border-radius: 10px;
+    }
+
+    .form-row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .form-row>.col,
+    .form-row>[class*=col-] {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .rdbtn {
+        padding-left: 0px;
+    }
+
+    #radio1 {
+        margin-right: 2px;
+    }
+
+    #radio2 {
+        margin-right: 2px;
+    }
+
+    #radio3 {
+        margin-right: 2px;
+    }
+
+    #radio4 {
+        margin-right: 2px;
+    }
+
+    #radio5 {
+        margin-right: 2px;
+    }
+
+    #radio10 {
+        margin-right: 2px;
+    }
+
+    #radio11 {
+        margin-right: 2px;
+    }
+
+    .custom-control.custom-radio.custom-control-inline {
+        width: auto;
+        padding-left: 40px;
+
+    }
+
+    div#successblock {
+        background-color: #28a745;
+        margin-top: 16px;
+        max-width: 335px;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 992px) {
+    #main {
+        max-width: 100%;
+        margin-left: 0px;
+        margin-top: 0px;
+        background-color: Gainsboro;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        border-radius: 0px;
+        min-height: 100vh;
+        padding-top: 40px;
+    }
+
+    #alert {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 75px 150px;
+        border-radius: 10px;
+        background-color: white;
+    }
+
+    .modal-fade {
+        width: 100%;
+        min-height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        position: fixed;
+        top: 0px;
+        display: none;
+    }
+
+    .alert-btn {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #047857;
+        padding: 5px 50px;
+        border-radius: 10px;
+    }
+
+    .form-row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .form-row>.col,
+    .form-row>[class*=col-] {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .rdbtn {
+        padding-left: 0px;
+    }
+
+    #radio1 {
+        margin-right: 2px;
+    }
+
+    #radio2 {
+        margin-right: 2px;
+    }
+
+    #radio3 {
+        margin-right: 2px;
+    }
+
+    #radio4 {
+        margin-right: 2px;
+    }
+
+    #radio5 {
+        margin-right: 2px;
+    }
+
+    #radio10 {
+        margin-right: 2px;
+    }
+
+    #radio11 {
+        margin-right: 2px;
+    }
+
+    div#successblock {
+        background-color: #28a745;
+        margin-bottom: 10px;
+        max-width: 100%;
+        border-radius: 5px;
+        color: white;
+        font-family: ubuntu;
+    }
+}
