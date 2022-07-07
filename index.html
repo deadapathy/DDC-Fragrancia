@@ -2,20 +2,16 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.js"
         integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA=" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -26,383 +22,135 @@
     <title>Форма ДДС [Fragrancia]</title>
 </head>
 
-<body>
+<body class="flex justify-center">
 
-    <div class="col-md-4" id="main">
-        <center><label>Форма ввода ДДС</label></center>
-        <hr>
-        <center>
-            <div class="rdbtn">
-                <!-- <div class="custom-control custom-radio custom-control-inline" id="radio1">
-                    <input type="radio" id="income" name="radio" class="custom-control-input" checked="checked">
-                    <label class="custom-control-label" for="income">Доход</label>
-                </div> -->
-
-                <div class="custom-control custom-radio custom-control-inline" id="radio2">
-                    <input type="radio" id="consumption" name="radio" class="custom-control-input" checked="checked">
-                    <label class="custom-control-label" for="consumption">Расход</label>
-                </div>
-
-                <div class="custom-control custom-radio custom-control-inline" id="radio4">
-                    <input type="radio" id="transfer" name="radio" class="custom-control-input">
-                    <label class="custom-control-label" for="transfer">Перевод</label>
-                </div>
-
-                <div class="custom-control custom-radio custom-control-inline" id="radio5">
-                    <input type="radio" id="convert" name="radio" class="custom-control-input">
-                    <label class="custom-control-label" for="convert">Конвертация</label>
-                </div>
-
-                <!-- <div class="custom-control custom-radio custom-control-inline" id="radio10">
-      <input type="radio" id="clientPay" name="radio" class="custom-control-input" >
-              <label class="custom-control-label" for="clientPay">Выплата клиент</label>
-    </div> -->
-
-                <!-- <div class="custom-control custom-radio custom-control-inline" id="radio11">
-                    <input type="radio" id="providerPay" name="radio" class="custom-control-input">
-                    <label class="custom-control-label" for="providerPay">Выплата поставщик</label>
-                </div> -->
-
-            </div>
-        </center>
-        <hr>
-
-        <!-- доход  -->
-        <div id="block1" class="block">
-            <div class="form-row">
-                <div class="form-row col-lg-5" id="Sum">
-                    <label for="inputSum">Сумма</label>
-                    <input class="form-control" id="theSum1" name="theSum1"
-                    onblur="this.value = this.value.replace(/\B(?=(?:\d{3})+(?!\d))/g, ' ')">
-
-                </div>
-                <div class="form-row col-lg-2"></div>
-                <div class="form-row col-lg-5" id="otvet">
-                    <label for="inputDate">Дата</label>
-                    <input class="form-control" type="date" name="Date" id="date">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group col-lg-12" id="bill">
-                    <label for="inputBill">Счёт</label>
-                    <select class="selectbill" class="form-control" id="selectbill" class="selectbill" id="selectbill"
-                        placeholder="Выберите счет" onchange="curAddict()" style="width: 100%"></select>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-lg-5" id="currency">
-                        <label for="inputCurrency">Валюта</label>
-                        <select class="form-control" id="selectCurrency" placeholder="Выберите валюту"
-                            style="width: 100%"></select>
-                    </div>
-                    <div class="form-row col-lg-2"></div>
-                    <div class="form-row col-lg-5" id="otvet">
-                        <label for="inputKurs">Курс</label>
-                        <input type="number" class="form-control" id="Kurs" name="Kurs">
-                    </div>
-                </div>
-                <div class="form-group col-lg-12" id="category">
-                    <label for="inputcategory">Категория</label>
-                    <select class="selectcategory" class="form-control" id="selectcategory"
-                        placeholder="Выберите категорию" style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-12" id="post">
-                    <label for="inputpost">Контрагент/сотрудник</label>
-                    <select class="selectpost" class="form-control" id="selectpost"
-                        placeholder="Выберите контрагента/сотрудника" style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-12">
-                    <label for="inputNote">Примечание</label>
-                    <textarea class="form-control" name="note" id="note" placeholder="Введите примечание"></textarea>
-                </div>
-            </div>
+    <!-- <div class="mt-10 sm:mt-20"> -->
+    <div class="main md:grid md:grid-cols-4 md:gap-6 w-full">
+        <div class="md:col-span-1">
         </div>
+        <div class="mt-5 md:mt-0 md:col-span-4 mb-5">
+            <form action="#" method="POST">
+                <div class="drop-shadow-xl overflow-hidden sm:rounded-md">
+                    <div class="px-4 py-5 bg-white sm:p-6">
+                        <h3 class="text-md font-medium leading-6 text-gray-700 flex justify-center">Форма ввода ДДС
+                        </h3>
+                        <hr class="mt-3">
+                        <div class="flex justify-center space-x-4">
+                            <div class="flex items-center mt-3">
+                                <input id="consumption" name="push-notifications" type="radio"
+                                    class="focus:ring-indigo-300 h-4 w-4 text-indigo-600 border-gray-300" checked>
+                                <label for="push-nothing" class="ml-2 block text-sm font-medium text-gray-700"> Расход
+                                </label>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <input id="transfer" name="push-notifications" type="radio"
+                                    class="focus:ring-indigo-300 h-4 w-4 text-indigo-600 border-gray-300">
+                                <label for="push-nothing" class="ml-2 block text-sm font-medium text-gray-700"> Перевод
+                                </label>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <input id="convert" name="push-notifications" type="radio"
+                                    class="focus:ring-indigo-300 h-4 w-4 text-indigo-600 border-gray-300">
+                                <label for="push-nothing" class="ml-2 block text-sm font-medium text-gray-700">
+                                    Конвертация
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="mt-3">
+                        <div class="grid grid-cols-4 gap-6 mt-5" id="block1">
+                            <div class="col-span-6">
+                                <label for="sum"
+                                    class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма</label>
+                                <input type="number" required name="sum" id="sum"
+                                    class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm border-gray-300 rounded-md">
+                            </div>
 
-        <!-- расход  -->
-        <div id="block2" class="block">
-            <div class="form-row">
-                <div class="form-group col-lg-5" id="Sum">
-                    <label for="inputSum">Сумма</label>
-                    <input class="form-control" id="theSum2"
-                        onblur="this.value = this.value.replace(/[^\d]/g, '').replace(/\B(?=(?:\d{3})+(?!\d))/g, ' ')"
-                        onfocus="this.value = this.value.replace(/\s/g, '')">
-                </div>
-                <div class="form-group col-lg-2"></div>
-                <div class="form-group col-lg-5" id="otvet">
-                    <label for="inputDate">Дата</label>
-                    <input type="date" class="form-control" name="Date" id="date1">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group col-lg-12" id="bill">
-                    <label for="inputBill">Счёт</label>
-                    <select class="selectbill1" class="form-control" id="selectbill1" class="selectbill1"
-                        onchange="curAddict1()" style="width: 100%"></select>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-lg-5" id="currency">
-                        <label for="inputCurrency">Валюта</label>
-                        <select class="form-control" id="selectCurrency1" style="width: 100%"></select>
-                    </div>
-                    <div class="form-row col-lg-2"></div>
-                    <div class="form-row col-lg-5" id="otvet">
-                        <label for="inputKurs1">Курс</label>
-                        <input type="number" class="form-control" id="Kurs1" name="Kurs1">
-                    </div>
-                </div>
-                <div class="form-group col-lg-12" id="category">
-                    <label for="inputcategory">Категория расхода</label>
-                    <select class="selectcategory1" class="form-control" id="selectcategory1"
-                        style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-12" id="post">
-                    <label for="inputpost">Контрагент/сотрудник</label>
-                    <select class="selectEmployee" class="form-control" id="selectEmployee"
-                        style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-12">
-                    <label for="inputNote">Примечание</label>
-                    <textarea class="form-control" name="note" id="note1"></textarea>
-                </div>
-            </div>
-        </div>
+                            <div class="col-span-6">
+                                <label for="date"
+                                    class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Дата</label>
+                                <input type="date" required name="date" id="date"
+                                    class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                            <div class="col-span-6">
+                                <label for="accounts" class="block text-sm font-medium text-gray-700">Счет</label>
+                                <select class="select2 js-example-basic-single" name="check">
+                                    <option value="KP">Kaspi Pay</option>
+                                    <option value="KP">Kaspi Акылбек</option>
+                                    <option value="KP">Forte Акылбек</option>
+                                    <option value="KP">Forte Расчетный Счет</option>
+                                    <option value="KP">Нал ₸</option>
+                                    <option value="KP">Нал $</option>
+                                    <option value="KP">Нал €</option>
+                                </select>
+                            </div>
+                            <div class="col-span-4">
+                                <label for="currency" class="block text-sm font-medium text-gray-700">Валюта</label>
+                                <select id="currency" name="currency"
+                                    class="currency-input mt-1 block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <option>тенге</option>
+                                    <option>доллар</option>
+                                    <option>евро</option>
+                                </select>
+                            </div>
+                            <div class="col-span-2">
+                                <label for="rate" class="block text-sm font-medium text-gray-700">Курс</label>
+                                <input type="text" required name="rate" id="date"
+                                    class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                            <div class="col-span-6">
+                                <label for="accounts" class="block text-sm font-medium text-gray-700">Категория
+                                    расхода</label>
+                                <select class="select2 js-example-basic-single" name="check">
 
-        <div id="block3" class="block">
-            <div class="form-row">
-                <div class="form-group col-lg-5" id="Sum">
-                    <label for="inputSum">Сумма</label>
-                    <input class="form-control" id="theSum3"
-                        onblur="this.value = this.value.replace(/[^\d]/g, '').replace(/\B(?=(?:\d{3})+(?!\d))/g, ' ')"
-                        onfocus="this.value = this.value.replace(/\s/g, '')">
-                </div>
-                <div class="form-group col-lg-2"></div>
-                <div class="form-group col-lg-5" id="otvet">
-                    <label for="inputDate">Дата</label>
-                    <input class="form-control" type="date" name="Date" id="date2">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group col-lg-12" id="bill">
-                    <label for="inputBill">Счёт</label>
-                    <select class="js-example-basic-single" class="form-control" id="selectbill2" class="selectbill2"
-                        style="width: 100%"></select>
-                </div>
-                <div class="form-row taken-given">
-                    <div class="form-group col-lg-12" id="category">
-                        <div class="custom-control custom-radio custom-control-inline col-lg-12">
-                            <input type="radio" id="taken" name="radio2" class="custom-control-input" checked="checked">
-                            <label class="custom-control-label" for="taken">Оплата за товар (в долг)</label>
+                                </select>
+                            </div>
+                            <div class="col-span-6 md:col-span-6">
+                                <label for="accounts"
+                                    class="block text-sm font-medium text-gray-700">Контрагент/сотрудник</label>
+                                <select class="select2 js-example-basic-single" name="check">
+                                    <option value="KP">Нуржан</option>
+                                    <option value="KP">Акылбек</option>
+                                    <option value="KP">Айгул</option>
+                                    <option value="KP">Нурслам</option>
+                                    <option value="KP">Архат</option>
+                                    <option value="KP">Нуркен</option>
+                                    <option value="KP">Алимжан</option>
+                                </select>
+                            </div>
+                            <div class="col-span-6">
+                                <label for="note" class="block text-sm font-medium text-gray-700"> Примечание </label>
+                                <div class="mt-1">
+                                    <textarea id="note" name="Note" rows="3"
+                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="custom-control custom-radio custom-control-inline col-lg-12">
-
+                        <div class="grid grid-cols-4 gap-6 mt-5 hidden" id="block2">
+                            <div class="col-span-6">
+                                <label for="accounts"
+                                    class="block text-sm font-medium text-gray-700">Контрагент/сотрудник</label>
+                                <select class="select2 js-example-basic-single" name="check">
+                                    <option value="KP">Нуржан</option>
+                                    <option value="KP">Акылбек</option>
+                                    <option value="KP">Айгул</option>
+                                    <option value="KP">Нурслам</option>
+                                    <option value="KP">Архат</option>
+                                    <option value="KP">Нуркен</option>
+                                    <option value="KP">Алимжан</option>
+                                </select>
+                            </div>
                         </div>
-
+                    </div>
+                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                        <button type="button" value="Отправить"
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ">Отправить
+                            в ДДС</button>
                     </div>
                 </div>
-                <div class="form-group col-lg-12" id="post">
-                    <label for="inputpost">Контрагент</label>
-                    <select class="js-example-basic-single" class="form-control" id="selectpost2"
-                        style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-12">
-                    <label for="inputNote">Примечание</label>
-                    <textarea class="form-control" name="note" id="note2"></textarea>
-                </div>
-            </div>
+            </form>
         </div>
-
-        <div id="block4" class="block">
-            <div class="form-row">
-                <div class="form-group col-lg-5">
-                    <label>С какого счёта</label>
-                    <select class="selectbill3" class="form-control" id="selectbill3" class="selectbill3"
-                        style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-2"></div>
-                <div class="form-group col-lg-5">
-                    <label>Сумма</label>
-                    <input class="form-control"
-                        onblur="this.value = this.value.replace(/[^\d]/g, '').replace(/\B(?=(?:\d{3})+(?!\d))/g, ' ')"
-                        onfocus="this.value = this.value.replace(/\s/g, '')" id="theSum4">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-5">
-                    <label>На какой счёт</label>
-                    <select class="selectbill4" class="form-control" id="selectbill4" class="selectbill4" value=2
-                        style="width: 100%"></select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group col-lg-12">
-                    <label>Дата</label>
-                    <input class="form-control" type="date" id="date3">
-                </div>
-                <!-- <div class="form-group col-lg-12" id="post">
-                    <label for="inputpost">Поставщик</label>
-                    <select class="form-control" id="selectpost3"></select>
-                </div> -->
-                <div class="form-group col-lg-12">
-                    <label>Примечание</label>
-                    <textarea class="form-control" name="note" id="note3"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- Конвертация  -->
-        <div id="block5" class="block">
-            <div class="form-row">
-                <div class="form-group col-lg-5">
-                    <label>С какого счёта</label>
-                    <select class="selectbillConv1" class="form-control" id="selectbillConv1" class="selectbillConv1"
-                        onchange="curConvert()" style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-2"></div>
-                <div class="form-group col-lg-5">
-                    <label>Сумма 1</label>
-                    <input class="form-control" id="theSumConv1" onchange="curConvert()">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-5">
-                    <label>На какой счёт</label>
-                    <select class="selectbillConv2" class="form-control" id="selectbillConv2" class="selectbillConv2"
-                        onchange="curConvert()" style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-2"></div>
-                <div class="form-group col-lg-5">
-                    <label>Сумма 2</label>
-                    <input class="form-control" id="theSumConv2" onchange="curConvert()">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-5">
-                    <label>Курс</label>
-                    <input class="form-control" type="number" id="KursConv">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group col-lg-12">
-                    <label>Дата</label>
-                    <input class="form-control" type="date" id="date4">
-                </div>
-                <div class="form-group col-lg-12">
-                    <label>Примечание</label>
-                    <textarea class="form-control" name="note" id="note4"></textarea>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Выплата клиент -->
-        <div id="block6" class="block">
-            <div class="form-row">
-                <div class="form-row col-lg-5" id="Sum">
-                    <label for="inputSum">Сумма</label>
-                    <input class="form-control" id="theSumClient" name="theSum"
-                        onblur="this.value = this.value.replace(/[^\d]/g, '').replace(/\B(?=(?:\d{3})+(?!\d))/g, ' ')"
-                        onfocus="this.value = this.value.replace(/\s/g, '')">
-                </div>
-                <div class="form-row col-lg-2"></div>
-                <div class="form-row col-lg-5" id="otvet">
-                    <label for="inputDate">Дата</label>
-                    <input class="form-control" type="date" id="dateClient">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group col-lg-12" id="bill">
-                    <label for="inputBill">Счёт</label>
-                    <select class="form-control" id="selectbillClient" class="selectbillClient" id="selectbill"
-                        style="width: 100%"></select>
-                </div>
-                <!-- <div class="form-row">
-        <div class="form-group col-lg-5" id="currency">
-          <label for="inputCurrency">Валюта</label>
-          <select class="form-control" id="selectCurrencyClient"></select>
-        </div>
-      </div> -->
-                <!-- <div class="form-group col-lg-12" id="category">
-                    <label for="inputcategory">Категория</label>
-                    <select class="form-control" id="selectcategoryClient"></select>
-                </div> -->
-                <div class="form-group col-lg-12" id="post">
-                    <label for="inputpost">Клиент</label>
-                    <select class="selectClient" class="form-control" id="selectClient" style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-12">
-                    <label for="inputNote">Примечание</label>
-                    <textarea class="form-control" name="note" id="noteClient"></textarea>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Выплата поставщик -->
-        <div id="block7" class="block">
-            <div class="form-row">
-                <div class="form-row col-lg-5" id="Sum">
-                    <label for="inputSum">Сумма</label>
-                    <input class="form-control" id="theSumProvider" name="theSum"
-                        onblur="this.value = this.value.replace(/[^\d]/g, '').replace(/\B(?=(?:\d{3})+(?!\d))/g, ' ')"
-                        onfocus="this.value = this.value.replace(/\s/g, '')">
-                </div>
-                <div class="form-row col-lg-2"></div>
-                <div class="form-row col-lg-5" id="otvet">
-                    <label for="inputDate">Дата</label>
-                    <input class="form-control" type="date" name="date" id="dateProvider">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group col-lg-12" id="bill">
-                    <label for="inputBill">Счёт</label>
-                    <select class="form-control" id="selectbillProvider" class="selectbillProvider" id="selectbill"
-                        style="width: 100%"></select>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-lg-5" id="currency">
-                        <label for="inputCurrency">Валюта</label>
-                        <select class="selectCurrencyProvider" class="form-control" id="selectCurrencyProvider"
-                            style="width: 100%"></select>
-                    </div>
-                    <div class="form-row col-lg-2"></div>
-                    <div class="form-row col-lg-5" id="otvet">
-                        <label for="inputKursProvider">Курс</label>
-                        <input type="number" class="form-control" id="KursProvider" name="Kurs">
-                    </div>
-                </div>
-                <!-- <div class="form-group col-lg-12" id="category">
-                    <label for="inputcategory">Категория</label>
-                    <select class="form-control" id="selectcategoryProvider"></select>
-                </div> -->
-                <div class="form-group col-lg-12" id="post">
-                    <label for="inputpost">Поставщик</label>
-                    <select class="selectProvider" class="form-control" id="selectProvider"
-                        style="width: 100%"></select>
-                </div>
-                <div class="form-group col-lg-12">
-                    <label for="inputNote">Примечание</label>
-                    <textarea class="form-control" name="note" id="noteProvider"></textarea>
-                </div>
-            </div>
-        </div>
-
-
-
-        <center>
-            <div class="modal-fade">
-                <div id="alert">
-                    <span id="alert-msg"></span>
-                    <button class="alert-btn" id="alert-btn" onclick="hideAlert()">OK</button>
-                </div>
-            </div>
-            <div id="successblock" class="form-group">
-                Данные успешно отправлены!
-            </div>
-        </center>
-        <center><button type="button" id="btn" class="btn btn-outline-success" onclick="sendData()">Отправить в
-                ДДС</button></center>
-
-
+    </div>
     </div>
 
 
