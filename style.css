@@ -17,6 +17,7 @@ input::-webkit-inner-spin-button {
 }
 
 .select2 {
+    display: block;
     width: 100%;
     margin-top: 3px;
 }
@@ -26,15 +27,6 @@ input::-webkit-inner-spin-button {
     width: 100%;
 }
 
-@media (max-width: 768px) {
-    .select2{
-        display: block;
-        width: 100%;
-    }
-    
-}
-
-
 
 @media (max-width: 320px) {
     .currency-input{
@@ -42,6 +34,7 @@ input::-webkit-inner-spin-button {
     }
     
 }
+
 
 
 

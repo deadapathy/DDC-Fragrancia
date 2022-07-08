@@ -61,66 +61,47 @@
                             <div class="col-span-6">
                                 <label for="sum"
                                     class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма</label>
-                                <input type="number" required name="sum" id="sum"
+                                <input type="number" required name="sum" id="consumption-sum"
                                     class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm border-gray-300 rounded-md">
                             </div>
 
                             <div class="col-span-6">
                                 <label for="date"
                                     class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Дата</label>
-                                <input type="date" required name="date" id="date"
+                                <input type="date" required name="date" id="consumption-date"
                                     class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
                             <div class="col-span-6">
                                 <label for="accounts" class="block text-sm font-medium text-gray-700">Счет</label>
-                                <select class="select2 js-example-basic-single" name="check">
-                                    <option value="KP">Kaspi Pay</option>
-                                    <option value="KP">Kaspi Акылбек</option>
-                                    <option value="KP">Forte Акылбек</option>
-                                    <option value="KP">Forte Расчетный Счет</option>
-                                    <option value="KP">Нал ₸</option>
-                                    <option value="KP">Нал $</option>
-                                    <option value="KP">Нал €</option>
+                                <select class="select2 js-example-basic-single" name="check" id="consumption-account">
+                                    
                                 </select>
                             </div>
-                            <div class="col-span-4">
+                            <div class="col-span-2">
                                 <label for="currency" class="block text-sm font-medium text-gray-700">Валюта</label>
-                                <select id="currency" name="currency"
+                                <select id="consumption-currency" name="currency"
                                     class="currency-input mt-1 block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     <option>тенге</option>
                                     <option>доллар</option>
                                     <option>евро</option>
                                 </select>
                             </div>
-                            <div class="col-span-2">
+                            <div class="col-span-4">
                                 <label for="rate" class="block text-sm font-medium text-gray-700">Курс</label>
-                                <input type="text" required name="rate" id="date"
+                                <input type="text" required name="rate" id="consumption-rate"
                                     class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
                             <div class="col-span-6">
                                 <label for="accounts" class="block text-sm font-medium text-gray-700">Категория
                                     расхода</label>
-                                <select class="select2 js-example-basic-single" name="check">
+                                <select class="select2 js-example-basic-single" name="check" id="consumption-expense">
 
-                                </select>
-                            </div>
-                            <div class="col-span-6 md:col-span-6">
-                                <label for="accounts"
-                                    class="block text-sm font-medium text-gray-700">Контрагент/сотрудник</label>
-                                <select class="select2 js-example-basic-single" name="check">
-                                    <option value="KP">Нуржан</option>
-                                    <option value="KP">Акылбек</option>
-                                    <option value="KP">Айгул</option>
-                                    <option value="KP">Нурслам</option>
-                                    <option value="KP">Архат</option>
-                                    <option value="KP">Нуркен</option>
-                                    <option value="KP">Алимжан</option>
                                 </select>
                             </div>
                             <div class="col-span-6">
                                 <label for="note" class="block text-sm font-medium text-gray-700"> Примечание </label>
                                 <div class="mt-1">
-                                    <textarea id="note" name="Note" rows="3"
+                                    <textarea id="consumption-note" name="Note" rows="3"
                                         class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
                                 </div>
                             </div>
@@ -128,28 +109,111 @@
 
                         <div class="grid grid-cols-4 gap-6 mt-5 hidden" id="block2">
                             <div class="col-span-6">
-                                <label for="accounts"
-                                    class="block text-sm font-medium text-gray-700">Контрагент/сотрудник</label>
-                                <select class="select2 js-example-basic-single" name="check">
-                                    <option value="KP">Нуржан</option>
-                                    <option value="KP">Акылбек</option>
-                                    <option value="KP">Айгул</option>
-                                    <option value="KP">Нурслам</option>
-                                    <option value="KP">Архат</option>
-                                    <option value="KP">Нуркен</option>
-                                    <option value="KP">Алимжан</option>
+                                <label for="accounts" class="block text-sm font-medium text-gray-700">С какого
+                                    счета</label>
+                                <select class="select2 js-example-basic-single" name="check" id="transfer-from-account">
+                                    
                                 </select>
+                            </div>
+                            <div class="col-span-6 mt-5">
+                                <label for="accounts" class="block text-sm font-medium text-gray-700">На какой
+                                    счет</label>
+                                <select class="select2 js-example-basic-single" name="check" id="transfer-to-account">
+                                    
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 place-content-stretch">
+                                <div class="mt-5">
+                                    <label for="sum"
+                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма</label>
+                                    <input type="number" required name="sum" id="transfer-sum"
+                                        class="w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm border-gray-300 rounded-md">
+                                </div>
+                                <div class="mt-5">
+                                    <label for="date"
+                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Дата</label>
+                                    <input type="date" required name="date" id="transfer-date"
+                                        class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                            </div>
+                            <div class="col-span-6 mt-5">
+                                <label for="note" class="block text-sm font-medium text-gray-700"> Примечание </label>
+                                <div class="mt-1">
+                                    <textarea id="transfer-note" name="Note" rows="3"
+                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-6  hidden" id="block3">
+                            <div class="grid grid-cols-2 gap-2 place-content-stretch">
+                                <div class="mt-5">
+                                    <label for="accounts" class="block text-sm font-medium text-gray-700">С какого
+                                        счета</label>
+                                    <select class="js-example-basic-single" name="check" id="convert-from-account">
+                                        <option value="KP">Нал ₸</option>
+                                        <option value="KP">Нал $</option>
+                                        <option value="KP">Нал €</option>
+                                    </select>
+                                </div>
+                                <div class="mt-5">
+                                    <label for="accounts" class="block text-sm font-medium text-gray-700">На какой
+                                        счет</label>
+                                    <select class="js-example-basic-single" name="check" id="convert-to-account">
+                                        <option value="KP">Нал ₸</option>
+                                        <option value="KP">Нал $</option>
+                                        <option value="KP">Нал €</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 place-content-stretch">
+                                <div class="mt-5">
+                                    <label for="sum"
+                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма
+                                        1</label>
+                                    <input type="number" required name="sum" id="convert-sum1"
+                                        class="w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm border-gray-300 rounded-md">
+                                </div>
+                                <div class="mt-5">
+                                    <label for="sum"
+                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма
+                                        2</label>
+                                    <input type="number" required name="sum" id="convert-sum2"
+                                        class="w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm border-gray-300 rounded-md">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 place-content-stretch">
+                                <div class="mt-5">
+                                    <label for="rate" class="block text-sm font-medium text-gray-700">Курс</label>
+                                    <input type="text" required name="rate" id="convert-rate"
+                                        class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                                <div class="mt-5">
+                                    <label for="date"
+                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Дата</label>
+                                    <input type="date" required name="date" id="convert-date"
+                                        class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                            </div>
+                            <div class="col-span-6 mt-5">
+                                <label for="note" class="block text-sm font-medium text-gray-700"> Примечание </label>
+                                <div class="mt-1">
+                                    <textarea id="convert-note" name="Note" rows="3"
+                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                    <div class="px-4 py-3 bg-gray-50 text-center sm:px-6">
                         <button type="button" value="Отправить"
                             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ">Отправить
                             в ДДС</button>
                     </div>
+
                 </div>
-            </form>
         </div>
+        </form>
+    </div>
     </div>
     </div>
 
