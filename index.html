@@ -7,11 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
     <!-- <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="script.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     <link rel="stylesheet" href="style.css">
 
     <title>Форма ДДС [Fragrancia]</title>
@@ -140,15 +139,24 @@
                             </div>
                             <div class="grid grid-cols-2 gap-2 place-content-stretch">
                                 <div class="mt-5">
-                                    <label for="sum"
-                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма конвертации</label>
-                                    <input type="text" required name="sum" id="transfer-sum"
+                                    <label for="transfer-convert"
+                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма
+                                        конвертации</label>
+                                    <input type="text" required name="sum" id="transfer-convert"
                                         class="w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 </div>
                                 <div class="mt-5">
-                                    <label for="date"
+                                    <label for="rate"
                                         class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Курс</label>
-                                    <input type="text" required name="date" id="transfer-date"
+                                    <input type="number" required name="date" id="transfer-rate" disabled
+                                        class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                            </div>
+                            <div class="col-span-6 mt-5" id="transfer-commission-block">
+                                <label for="commission" class="block text-sm font-medium text-gray-700"> Комиссия банка
+                                </label>
+                                <div class="mt-1">
+                                    <input type="text" name="commission" id="transfer-commission"
                                         class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 </div>
                             </div>
@@ -238,8 +246,9 @@
     </div>
     </div>
 
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
