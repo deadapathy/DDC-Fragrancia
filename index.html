@@ -42,13 +42,6 @@
                                 <label for="push-nothing" class="ml-2 block text-sm font-medium text-gray-700"> Перевод
                                 </label>
                             </div>
-                            <div class="flex items-center mt-3">
-                                <input id="convert" name="push-notifications" type="radio"
-                                    class="focus:ring-indigo-300 h-4 w-4 text-indigo-600 border-gray-300">
-                                <label for="push-nothing" class="ml-2 block text-sm font-medium text-gray-700">
-                                    Конвертация
-                                </label>
-                            </div>
                         </div>
                         <hr class="mt-3">
                         <div class="grid grid-cols-6 gap-4 mt-5" id="block1">
@@ -124,7 +117,7 @@
                                 <div class="mt-5">
                                     <label for="sum"
                                         class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма</label>
-                                    <input type="text" required name="sum" id="transfer-sum"
+                                    <input type="number" required name="sum" id="transfer-sum"
                                         class="w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 </div>
                                 <div class="mt-5">
@@ -149,7 +142,7 @@
                                     <label for="rate"
                                         class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Курс</label>
                                     <input type="number" required name="date" id="transfer-rate" disabled
-                                        class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-100">
                                 </div>
                             </div>
                             <div class="col-span-6 mt-5" id="transfer-commission-block">
@@ -164,65 +157,6 @@
                                 <label for="note" class="block text-sm font-medium text-gray-700"> Примечание </label>
                                 <div class="mt-1">
                                     <textarea id="transfer-note" name="Note" rows="3"
-                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-4 gap-6  hidden" id="block3">
-                            <div class="grid grid-cols-2 gap-2 place-content-stretch">
-                                <div class="mt-5">
-                                    <label for="accounts" class="block text-sm font-medium text-gray-700">С какого
-                                        счета</label>
-                                    <select class="js-example-basic-single" name="check" id="convert-from-account">
-                                        <option value="KP">Нал ₸</option>
-                                        <option value="KP">Нал $</option>
-                                        <option value="KP">Нал €</option>
-                                    </select>
-                                </div>
-                                <div class="mt-5">
-                                    <label for="accounts" class="block text-sm font-medium text-gray-700">На какой
-                                        счет</label>
-                                    <select class="js-example-basic-single" name="check" id="convert-to-account">
-                                        <option value="KP">Нал ₸</option>
-                                        <option value="KP">Нал $</option>
-                                        <option value="KP">Нал €</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 place-content-stretch">
-                                <div class="mt-5">
-                                    <label for="sum"
-                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма
-                                        1</label>
-                                    <input type="number" required name="sum" id="convert-sum1"
-                                        class="w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm border-gray-300 rounded-md">
-                                </div>
-                                <div class="mt-5">
-                                    <label for="sum"
-                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Сумма
-                                        2</label>
-                                    <input type="number" required name="sum" id="convert-sum2"
-                                        class="w-full mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm border-gray-300 rounded-md">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 place-content-stretch">
-                                <div class="mt-5">
-                                    <label for="rate" class="block text-sm font-medium text-gray-700">Курс</label>
-                                    <input type="text" required name="rate" id="convert-rate"
-                                        class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                </div>
-                                <div class="mt-5">
-                                    <label for="date"
-                                        class="after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-700">Дата</label>
-                                    <input type="date" required name="date" id="convert-date"
-                                        class="input-form mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                </div>
-                            </div>
-                            <div class="col-span-6 mt-5">
-                                <label for="note" class="block text-sm font-medium text-gray-700"> Примечание </label>
-                                <div class="mt-1">
-                                    <textarea id="convert-note" name="Note" rows="3"
                                         class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
                                 </div>
                             </div>

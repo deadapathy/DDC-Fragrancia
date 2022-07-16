@@ -166,39 +166,41 @@ function transfer_sendData() {
 }
 
 
+
+
 $('#transfer-from-account').on('select2:select', function (e) {
-    var data = e.params.data;
+    let transfer_from_account = e.params.data;
 
-    if (data.id == 3) {
-        let el = document.getElementById('transfer-sum');
+    if (transfer_from_account.text == 'Нал ₸') {
+        let el = document.getElementById('transfer-convert');
 
         el.addEventListener('input', function () {
             let sum = document.getElementById('transfer-sum').value
             let sum_convert = document.getElementById('transfer-convert').value
+            let result = document.getElementById('transfer-rate').value = parseFloat(sum) / parseFloat(sum_convert);
 
-            let result = document.getElementById('transfer-rate').value = sum / sum_convert;
-            result.toFixed(2);
+            if (isNaN(result) || isNaN(sum) || isNaN(sum_convert)) {
+                result.innerHTML = 'Неверный ввод данных';
+                sum.innerHTML = 'Неверный ввод данных';
+                sum_convert.innerHTML = 'Неверный ввод данных';
+            }
+
         })
-    } else if (data.id == 8 || data.id == 9) {
+
+    } else if (transfer_from_account.text == 'Нал $' || transfer_from_account.text == 'Нал €') {
         let el = document.getElementById('transfer-sum');
 
         el.addEventListener('input', function () {
             let sum = document.getElementById('transfer-sum').value
             let sum_convert = document.getElementById('transfer-convert').value
 
-            let result = document.getElementById('transfer-rate').value = sum_convert / sum;
-            result.toFixed(2);
+            let result = document.getElementById('transfer-rate').value = (sum_convert / sum).toFixed(2);
+
         })
     } else {
         document.getElementById('transfer-rate').value = 0;
     }
-
-
-})
-
-
-
-
+});
 
 function digits_int(target) {
     val = $(target).val().replace(/[^0-9]/g, '');
@@ -237,6 +239,23 @@ $(function ($) {
 //     })
 // })
 
+let commission_hidden = document.getElementById('transfer-convert');
+
+commission_hidden.onmouseover = function (event) {
+    $("#transfer-commission-block").addClass("hidden");
+}
+
+commission_hidden.onmouseleave = function (event) {
+    $("#transfer-commission-block").removeClass("hidden");
+}
+
+// $('#transfer-convert').on('click', function () {
+
+//     $('#transfer-commission').addClass("bg-gray-100").attr('disabled', 'disabled');
+
+
+// })
+
 
 function clearForm() {
     document.getElementById('consumption-sum').value = null;
@@ -247,26 +266,21 @@ function clearForm() {
 
 $(function rdBtn() {
     $("#consumption").on('click', function () {
-        $("#block2").hide()
-        $("#block3").hide()
+        $("#block2").hide();
         $("#block1").show("slow");
+        $("#btnblock2").hide();
+        $("#btnblock1").show();
 
     })
 
     $("#transfer").on('click', function () {
         $("#block1").hide();
-        $("#block3").hide()
-        $("#btnblock1").hide()
         $("#block2").show("slow");
-        $("#btnblock2").show()
-    })
-
-    $("#convert").on('click', function () {
-        $("#block1").hide();
-        $("#block2").hide();
-        $("#btnblock1").hide()
-        $("#btnblock2").hide()
-        $("#block3").show("slow");
+        $("#btnblock1").hide();
+        $("#btnblock2").show("slow");
     })
 
 });
+
+
+
