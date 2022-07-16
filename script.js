@@ -166,18 +166,35 @@ function transfer_sendData() {
 }
 
 
-let el = document.getElementById('transfer-sum');
+$('#transfer-from-account').on('select2:select', function (e) {
+    var data = e.params.data;
 
-el.addEventListener('input', function () {
-    let sum = document.getElementById('transfer-sum').value
-    let sum_convert = document.getElementById('transfer-convert').value
-    
-    let result = document.getElementById('transfer-rate').value = sum / sum_convert;
-    result.toFixed(2);
+    if (data.id == 3) {
+        let el = document.getElementById('transfer-sum');
+
+        el.addEventListener('input', function () {
+            let sum = document.getElementById('transfer-sum').value
+            let sum_convert = document.getElementById('transfer-convert').value
+
+            let result = document.getElementById('transfer-rate').value = sum / sum_convert;
+            result.toFixed(2);
+        })
+    } else if (data.id == 8 || data.id == 9) {
+        let el = document.getElementById('transfer-sum');
+
+        el.addEventListener('input', function () {
+            let sum = document.getElementById('transfer-sum').value
+            let sum_convert = document.getElementById('transfer-convert').value
+
+            let result = document.getElementById('transfer-rate').value = sum_convert / sum;
+            result.toFixed(2);
+        })
+    } else {
+        document.getElementById('transfer-rate').value = 0;
+    }
+
+
 })
-
-
-
 
 
 
@@ -196,19 +213,19 @@ $(function ($) {
     digits_int('#consumption-sum');
 });
 
-$(function ($) {
-    $('body').on('input', '#transfer-sum', function (e) {
-        digits_int(this);
-    });
-    digits_int('#transfer-sum');
-});
+// $(function ($) {
+//     $('body').on('input', '#transfer-sum', function (e) {
+//         digits_int(this);
+//     });
+//     digits_int('#transfer-sum');
+// });
 
-$(function ($) {
-    $('body').on('input', '#transfer-convert', function (e) {
-        digits_int(this);
-    });
-    digits_int('#transfer-convert');
-});
+// $(function ($) {
+//     $('body').on('input', '#transfer-convert', function (e) {
+//         digits_int(this);
+//     });
+//     digits_int('#transfer-convert');
+// });
 
 // $(function ($) {
 //     $("#transfer-convert").on('click', function () {
