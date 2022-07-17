@@ -116,7 +116,7 @@ function consumption_sendData() {
         }
     });
 
-    clearForm();
+    clearFormConsumption();
 }
 
 function transfer_sendData() {
@@ -125,7 +125,7 @@ function transfer_sendData() {
     let transfer_sum = document.getElementById('transfer-sum').value
     let transfer_date = document.getElementById('transfer-date').value
     let transfer_note = document.getElementById('transfer-note').value
-    let consumption_rate = document.getElementById('consumption-rate').value = 0
+    let consumption_rate = document.getElementById('transfer-rate').value
     let consumption_expense = $('#consumption-expense :selected').value = "Перевод"
 
     let transfer_array = [[id, transfer_sum, transfer_date, transfer_from_account,
@@ -147,7 +147,7 @@ function transfer_sendData() {
     let transfer_sum1 = document.getElementById('transfer-sum').value
     let transfer_date1 = document.getElementById('transfer-date').value
     let transfer_note1 = document.getElementById('transfer-note').value
-    let consumption_rate1 = document.getElementById('consumption-rate').value = 0
+    let consumption_rate1 = document.getElementById('transfer-rate').value
     let consumption_expense1 = $('#consumption-expense :selected').value = "Перевод"
 
     let transfer_array_update = [[id, transfer_sum1, transfer_date1, transfer_to_account,
@@ -163,8 +163,9 @@ function transfer_sendData() {
             alert(data);
         }
     });
-}
 
+    clearFormTransfer()
+}
 
 
 
@@ -177,10 +178,9 @@ $('#transfer-from-account').on('select2:select', function (e) {
         el.addEventListener('input', function () {
             let sum = document.getElementById('transfer-sum').value
             let sum_convert = document.getElementById('transfer-convert').value
-            let result = document.getElementById('transfer-rate').value = parseFloat(sum) / parseFloat(sum_convert);
+            document.getElementById('transfer-rate').value = (parseFloat(sum) / parseFloat(sum_convert)).toFixed(2);
 
-            if (isNaN(result) || isNaN(sum) || isNaN(sum_convert)) {
-                result.innerHTML = 'Неверный ввод данных';
+            if (isNaN(sum) || isNaN(sum_convert)) {
                 sum.innerHTML = 'Неверный ввод данных';
                 sum_convert.innerHTML = 'Неверный ввод данных';
             }
@@ -188,19 +188,22 @@ $('#transfer-from-account').on('select2:select', function (e) {
         })
 
     } else if (transfer_from_account.text == 'Нал $' || transfer_from_account.text == 'Нал €') {
-        let el = document.getElementById('transfer-sum');
+        let el = document.getElementById('transfer-convert');
 
         el.addEventListener('input', function () {
             let sum = document.getElementById('transfer-sum').value
             let sum_convert = document.getElementById('transfer-convert').value
 
-            let result = document.getElementById('transfer-rate').value = (sum_convert / sum).toFixed(2);
+            document.getElementById('transfer-rate').value = (parseFloat(sum_convert) / parseFloat(sum)).toFixed(2);
+
 
         })
     } else {
         document.getElementById('transfer-rate').value = 0;
     }
 });
+
+disableCommission();
 
 function digits_int(target) {
     val = $(target).val().replace(/[^0-9]/g, '');
@@ -239,28 +242,49 @@ $(function ($) {
 //     })
 // })
 
-let commission_hidden = document.getElementById('transfer-convert');
+// let commission_hidden = document.getElementById('transfer-convert');
 
-commission_hidden.onmouseover = function (event) {
-    $("#transfer-commission-block").addClass("hidden");
-}
+// commission_hidden.onmouseover = function (event) {
+//     $("#transfer-commission-block").addClass("hidden");
+// }
 
-commission_hidden.onmouseleave = function (event) {
-    $("#transfer-commission-block").removeClass("hidden");
-}
+// commission_hidden.onmouseleave = function (event) {
+//     $("#transfer-commission-block").removeClass("hidden");
+// }
 
-// $('#transfer-convert').on('click', function () {
+// $('#transfer-convert').on('input', function () {
 
 //     $('#transfer-commission').addClass("bg-gray-100").attr('disabled', 'disabled');
 
+// }) 
 
-// })
 
 
-function clearForm() {
+
+function disableCommission() {
+
+    let element = document.getElementById("transfer-convert");
+
+    if (element.text != "" || 0) {
+        element.addEventListener('input', function () {
+            $('#transfer-commission').addClass("bg-gray-100").attr('disabled', 'disabled');
+        })
+    }
+}
+
+function clearFormConsumption() {
     document.getElementById('consumption-sum').value = null;
     document.getElementById('consumption-rate').value = null;
     document.getElementById('consumption-note').value = "";
+}
+
+function clearFormTransfer() {
+    $('#transfer-commission').removeClass("bg-gray-100").removeAttr('disabled', 'disabled');
+    document.getElementById('transfer-sum').value = "";
+    document.getElementById('transfer-convert').value = "";
+    document.getElementById('transfer-rate').value = null;
+    document.getElementById('transfer-commission').value = "";
+    document.getElementById('transfer-note').value = "";
 }
 
 
