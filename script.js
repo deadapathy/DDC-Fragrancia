@@ -1,5 +1,7 @@
-var id;
 
+
+
+disableCommission();
 
 $(document).ready(function () {
     $('#consumption-account').select2({
@@ -93,7 +95,7 @@ $(document).ready(function () {
 
 
 function consumption_sendData() {
-
+    let id;
     let consumption_sum = document.getElementById('consumption-sum').value;
     let consumption_date = document.getElementById('consumption-date').value
     let consumption_account = $('#consumption-account :selected').text();
@@ -102,8 +104,8 @@ function consumption_sendData() {
     let consumption_expense = $('#consumption-expense :selected').text();
     let consumption_note = document.getElementById('consumption-note').value
 
-    let consumption_array = [[consumption_sum, consumption_date, consumption_account,
-        consumption_rate, consumption_expense, consumption_note, id]];
+    let consumption_array = [[id, consumption_sum, consumption_date, consumption_account,
+        consumption_rate, consumption_expense, consumption_note]];
 
     $.ajax({
         url: 'consumption_sendData.php',
@@ -154,7 +156,7 @@ function transfer_sendData() {
         consumption_rate1, consumption_expense1, transfer_note1]];
 
     $.ajax({
-        url: 'transfer_Update.php',
+        url: 'transfer_sendData.php',
         method: 'post',
         dataType: 'json',
         data: { transfer_array_update: transfer_array_update },
@@ -203,7 +205,7 @@ $('#transfer-from-account').on('select2:select', function (e) {
     }
 });
 
-disableCommission();
+
 
 function digits_int(target) {
     val = $(target).val().replace(/[^0-9]/g, '');
