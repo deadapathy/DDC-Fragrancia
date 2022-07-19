@@ -1,6 +1,5 @@
 
 
-
 disableCommission();
 
 $(document).ready(function () {
@@ -95,17 +94,29 @@ $(document).ready(function () {
 
 
 function consumption_sendData() {
-    let id;
-    let consumption_sum = document.getElementById('consumption-sum').value;
+    // let id;
+    // $.ajax({
+    //     url: 'getMaxId.php',
+    //     method: 'GET',
+    //     dataType: 'json',
+
+    //     success: function (data = 1) {
+    //         console.log(data)
+    //         id = Number(data[0] + 1);
+    //         console.log(id);
+    //     }
+    // });
+
+    let consumption_sum = (document.getElementById('consumption-sum').value).replace(/\s/g, '') * -1;
     let consumption_date = document.getElementById('consumption-date').value
     let consumption_account = $('#consumption-account :selected').text();
     // let consumption_currency = document.getElementById('consumption-currency').value
     let consumption_rate = document.getElementById('consumption-rate').value
     let consumption_expense = $('#consumption-expense :selected').text();
     let consumption_note = document.getElementById('consumption-note').value
-
     let consumption_array = [[id, consumption_sum, consumption_date, consumption_account,
         consumption_rate, consumption_expense, consumption_note]];
+
 
     $.ajax({
         url: 'consumption_sendData.php',
@@ -121,10 +132,10 @@ function consumption_sendData() {
     clearFormConsumption();
 }
 
-function transfer_sendData() {
 
+function transfer_sendData() {
     let transfer_from_account = $('#transfer-from-account :selected').text();
-    let transfer_sum = document.getElementById('transfer-sum').value
+    let transfer_sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '') * -1;
     let transfer_date = document.getElementById('transfer-date').value
     let transfer_note = document.getElementById('transfer-note').value
     let consumption_rate = document.getElementById('transfer-rate').value
@@ -144,9 +155,8 @@ function transfer_sendData() {
         }
     });
 
-
     let transfer_to_account = $('#transfer-to-account :selected').text();
-    let transfer_sum1 = document.getElementById('transfer-sum').value
+    let transfer_sum1 = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
     let transfer_date1 = document.getElementById('transfer-date').value
     let transfer_note1 = document.getElementById('transfer-note').value
     let consumption_rate1 = document.getElementById('transfer-rate').value
@@ -156,7 +166,7 @@ function transfer_sendData() {
         consumption_rate1, consumption_expense1, transfer_note1]];
 
     $.ajax({
-        url: 'transfer_sendData.php',
+        url: 'transfer_Update1.php',
         method: 'post',
         dataType: 'json',
         data: { transfer_array_update: transfer_array_update },
@@ -165,6 +175,30 @@ function transfer_sendData() {
             alert(data);
         }
     });
+
+    let commission = (document.getElementById('transfer-commission').value).replace(/\s/g, '') * - 1;
+    let transfer_from_account2 = $('#transfer-from-account :selected').text();
+    let transfer_date2 = document.getElementById('transfer-date').value
+    let transfer_note2 = document.getElementById('transfer-note').value
+    let consumption_rate2 = document.getElementById('transfer-rate').value = 0;
+    let consumption_expense2 = $('#consumption-expense :selected').value = "Перевод"
+
+
+    let transfer_array_commission = [[id, commission, transfer_date2, transfer_from_account2,
+        consumption_rate2, consumption_expense2, transfer_note2]];
+
+    if (commission != "" || 0) {
+        $.ajax({
+            url: 'transfer_Update2.php',
+            method: 'post',
+            dataType: 'json',
+            data: { transfer_array_commission: transfer_array_commission },
+
+            success: function (data) {
+                alert(data);
+            }
+        });
+    }
 
     clearFormTransfer()
 }
@@ -178,8 +212,8 @@ $('#transfer-from-account').on('select2:select', function (e) {
         let el = document.getElementById('transfer-convert');
 
         el.addEventListener('input', function () {
-            let sum = document.getElementById('transfer-sum').value
-            let sum_convert = document.getElementById('transfer-convert').value
+            let sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
+            let sum_convert = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
             document.getElementById('transfer-rate').value = (parseFloat(sum) / parseFloat(sum_convert)).toFixed(2);
 
             if (isNaN(sum) || isNaN(sum_convert)) {
@@ -193,8 +227,8 @@ $('#transfer-from-account').on('select2:select', function (e) {
         let el = document.getElementById('transfer-convert');
 
         el.addEventListener('input', function () {
-            let sum = document.getElementById('transfer-sum').value
-            let sum_convert = document.getElementById('transfer-convert').value
+            let sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
+            let sum_convert = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
 
             document.getElementById('transfer-rate').value = (parseFloat(sum_convert) / parseFloat(sum)).toFixed(2);
 
@@ -208,7 +242,7 @@ $('#transfer-from-account').on('select2:select', function (e) {
 
 
 function digits_int(target) {
-    val = $(target).val().replace(/[^0-9]/g, '');
+    val = $(target).val().replace(/[^0-9,.]/g, '');
     val = val.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     $(target).val(val);
 }
@@ -220,19 +254,26 @@ $(function ($) {
     digits_int('#consumption-sum');
 });
 
-// $(function ($) {
-//     $('body').on('input', '#transfer-sum', function (e) {
-//         digits_int(this);
-//     });
-//     digits_int('#transfer-sum');
-// });
+$(function ($) {
+    $('body').on('input', '#transfer-sum', function (e) {
+        digits_int(this);
+    });
+    digits_int('#transfer-sum');
+});
 
-// $(function ($) {
-//     $('body').on('input', '#transfer-convert', function (e) {
-//         digits_int(this);
-//     });
-//     digits_int('#transfer-convert');
-// });
+$(function ($) {
+    $('body').on('input', '#transfer-convert', function (e) {
+        digits_int(this);
+    });
+    digits_int('#transfer-convert');
+});
+
+$(function ($) {
+    $('body').on('input', '#transfer-commission', function (e) {
+        digits_int(this);
+    });
+    digits_int('#transfer-commission');
+});
 
 // $(function ($) {
 //     $("#transfer-convert").on('click', function () {
