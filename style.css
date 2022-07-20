@@ -22,17 +22,17 @@ input::-webkit-inner-spin-button {
     margin-top: 3px;
 }
 
-.currency-input{
+.currency-input {
     display: block;
     width: 100%;
 }
 
 
 @media (max-width: 320px) {
-    .currency-input{
+    .currency-input {
         width: 90px;
     }
-    
+
 }
 
 

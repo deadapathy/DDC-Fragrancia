@@ -16,8 +16,4 @@ $q = mysqli_fetch_all($result);
 echo json_encode($q);
 
 
-
-
-
-
 ?>

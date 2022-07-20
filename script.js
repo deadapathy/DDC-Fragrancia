@@ -1,6 +1,5 @@
-
-
 disableCommission();
+cuurentDate();
 
 $(document).ready(function () {
     $('#consumption-account').select2({
@@ -46,7 +45,6 @@ $(document).ready(function () {
     });
 });
 
-
 $(document).ready(function () {
     $('#transfer-from-account').select2({
         ajax: {
@@ -91,22 +89,27 @@ $(document).ready(function () {
     });
 });
 
+function consumption_getMaxId() {
+    hide_button();
+    let temp_id = 1;
+    $.ajax({
+        url: 'getMaxId.php',
+        method: 'GET',
+        dataType: 'json',
 
+        success: function (data) {
+            $.id = Number(data[0]) + temp_id;
+            console.log(data)
+            //id = Number(data[0]) + 1;
+            consumption_sendData();
+            clearFormConsumption();
+            show_button();
+        }
+    });
+}
 
 function consumption_sendData() {
-    // let id;
-    // $.ajax({
-    //     url: 'getMaxId.php',
-    //     method: 'GET',
-    //     dataType: 'json',
-
-    //     success: function (data = 1) {
-    //         console.log(data)
-    //         id = Number(data[0] + 1);
-    //         console.log(id);
-    //     }
-    // });
-
+    //console.log("Вне функции:", $.id)
     let consumption_sum = (document.getElementById('consumption-sum').value).replace(/\s/g, '') * -1;
     let consumption_date = document.getElementById('consumption-date').value
     let consumption_account = $('#consumption-account :selected').text();
@@ -114,9 +117,8 @@ function consumption_sendData() {
     let consumption_rate = document.getElementById('consumption-rate').value
     let consumption_expense = $('#consumption-expense :selected').text();
     let consumption_note = document.getElementById('consumption-note').value
-    let consumption_array = [[id, consumption_sum, consumption_date, consumption_account,
+    let consumption_array = [[$.id, consumption_sum, consumption_date, consumption_account,
         consumption_rate, consumption_expense, consumption_note]];
-
 
     $.ajax({
         url: 'consumption_sendData.php',
@@ -128,10 +130,28 @@ function consumption_sendData() {
             alert(data);
         }
     });
-
-    clearFormConsumption();
+    //$('#btnblock1').addClass("hidden").attr('disabled', 'disabled');
+    //clearFormConsumption();
+    //$('#btnblock1').removeClass("hidden").removeAttr('disabled', 'disabled');
 }
 
+function transfer_getMaxId() {
+    hide_button();
+    let temp_id = 1;
+    $.ajax({
+        url: 'getMaxId.php',
+        method: 'GET',
+        dataType: 'json',
+
+        success: function (data) {
+            $.id = Number(data[0]) + temp_id;
+            //id = Number(data[0]) + 1;
+            transfer_sendData();
+            clearFormTransfer();
+            show_button();
+        }
+    });
+}
 
 function transfer_sendData() {
     let transfer_from_account = $('#transfer-from-account :selected').text();
@@ -141,7 +161,7 @@ function transfer_sendData() {
     let consumption_rate = document.getElementById('transfer-rate').value
     let consumption_expense = $('#consumption-expense :selected').value = "Перевод"
 
-    let transfer_array = [[id, transfer_sum, transfer_date, transfer_from_account,
+    let transfer_array = [[$.id, transfer_sum, transfer_date, transfer_from_account,
         consumption_rate, consumption_expense, transfer_note]]
 
     $.ajax({
@@ -155,36 +175,61 @@ function transfer_sendData() {
         }
     });
 
-    let transfer_to_account = $('#transfer-to-account :selected').text();
-    let transfer_sum1 = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
-    let transfer_date1 = document.getElementById('transfer-date').value
-    let transfer_note1 = document.getElementById('transfer-note').value
-    let consumption_rate1 = document.getElementById('transfer-rate').value
-    let consumption_expense1 = $('#consumption-expense :selected').value = "Перевод"
+    convert = document.getElementById('transfer-convert').value;
+    if (convert != "" || 0) {
 
-    let transfer_array_update = [[id, transfer_sum1, transfer_date1, transfer_to_account,
-        consumption_rate1, consumption_expense1, transfer_note1]];
+        let transfer_to_account = $('#transfer-to-account :selected').text();
+        let transfer_sum1 = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
+        let transfer_date1 = document.getElementById('transfer-date').value
+        let transfer_note1 = document.getElementById('transfer-note').value
+        let consumption_rate1 = document.getElementById('transfer-rate').value
+        let consumption_expense1 = $('#consumption-expense :selected').value = "Перевод"
 
-    $.ajax({
-        url: 'transfer_Update1.php',
-        method: 'post',
-        dataType: 'json',
-        data: { transfer_array_update: transfer_array_update },
+        let transfer_array_update = [[$.id, transfer_sum1, transfer_date1, transfer_to_account,
+            consumption_rate1, consumption_expense1, transfer_note1]];
 
-        success: function (data) {
-            alert(data);
-        }
-    });
+        $.ajax({
+            url: 'transfer_Update1.php',
+            method: 'post',
+            dataType: 'json',
+            data: { transfer_array_update: transfer_array_update },
+
+            success: function (data) {
+                alert(data);
+            }
+        });
+    } else {
+        let transfer_to_account = $('#transfer-to-account :selected').text();
+        let transfer_sum1 = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
+        let transfer_date1 = document.getElementById('transfer-date').value
+        let transfer_note1 = document.getElementById('transfer-note').value
+        let consumption_rate1 = document.getElementById('transfer-rate').value
+        let consumption_expense1 = $('#consumption-expense :selected').value = "Перевод"
+
+        let transfer_array_update = [[$.id, transfer_sum1, transfer_date1, transfer_to_account,
+            consumption_rate1, consumption_expense1, transfer_note1]];
+
+        $.ajax({
+            url: 'transfer_Update1.php',
+            method: 'post',
+            dataType: 'json',
+            data: { transfer_array_update: transfer_array_update },
+
+            success: function (data) {
+                alert(data);
+            }
+        });
+    }
 
     let commission = (document.getElementById('transfer-commission').value).replace(/\s/g, '') * - 1;
     let transfer_from_account2 = $('#transfer-from-account :selected').text();
     let transfer_date2 = document.getElementById('transfer-date').value
     let transfer_note2 = document.getElementById('transfer-note').value
     let consumption_rate2 = document.getElementById('transfer-rate').value = 0;
-    let consumption_expense2 = $('#consumption-expense :selected').value = "Перевод"
+    let consumption_expense2 = $('#consumption-expense :selected').value = "Комиссия банка"
 
 
-    let transfer_array_commission = [[id, commission, transfer_date2, transfer_from_account2,
+    let transfer_array_commission = [[$.id, commission, transfer_date2, transfer_from_account2,
         consumption_rate2, consumption_expense2, transfer_note2]];
 
     if (commission != "" || 0) {
@@ -199,19 +244,28 @@ function transfer_sendData() {
             }
         });
     }
-
-    clearFormTransfer()
 }
-
-
 
 $('#transfer-from-account').on('select2:select', function (e) {
     let transfer_from_account = e.params.data;
 
-    if (transfer_from_account.text == 'Нал ₸') {
-        let el = document.getElementById('transfer-convert');
+    if (transfer_from_account.id == 1 || transfer_from_account.id == 3 || transfer_from_account.id == 4
+        || transfer_from_account.id == 5 || transfer_from_account.id == 6 || transfer_from_account.id == 7) {
 
+        let el = document.getElementById('transfer-convert');
         el.addEventListener('input', function () {
+            let sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
+            let sum_convert = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
+            document.getElementById('transfer-rate').value = (parseFloat(sum) / parseFloat(sum_convert)).toFixed(2);
+
+            if (isNaN(sum) || isNaN(sum_convert)) {
+                sum.innerHTML = 'Неверный ввод данных';
+                sum_convert.innerHTML = 'Неверный ввод данных';
+            }
+        })
+
+        let el1 = document.getElementById('transfer-sum');
+        el1.addEventListener('input', function () {
             let sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
             let sum_convert = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
             document.getElementById('transfer-rate').value = (parseFloat(sum) / parseFloat(sum_convert)).toFixed(2);
@@ -222,24 +276,26 @@ $('#transfer-from-account').on('select2:select', function (e) {
             }
 
         })
-
-    } else if (transfer_from_account.text == 'Нал $' || transfer_from_account.text == 'Нал €') {
+    } else if (transfer_from_account.id == 8 || 9) {
         let el = document.getElementById('transfer-convert');
-
         el.addEventListener('input', function () {
             let sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
             let sum_convert = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
 
             document.getElementById('transfer-rate').value = (parseFloat(sum_convert) / parseFloat(sum)).toFixed(2);
+        })
 
+        let el1 = document.getElementById('transfer-sum');
+        el1.addEventListener('input', function () {
+            let sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
+            let sum_convert = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
 
+            document.getElementById('transfer-rate').value = (parseFloat(sum_convert) / parseFloat(sum)).toFixed(2);
         })
     } else {
         document.getElementById('transfer-rate').value = 0;
     }
 });
-
-
 
 function digits_int(target) {
     val = $(target).val().replace(/[^0-9,.]/g, '');
@@ -275,35 +331,6 @@ $(function ($) {
     digits_int('#transfer-commission');
 });
 
-// $(function ($) {
-//     $("#transfer-convert").on('click', function () {
-//         $("#transfer-commission-block").hide()
-//     })
-
-//     $("#transfer-convert").mouseout(function () {
-//         $("#transfer-commission-block").show()
-//     })
-// })
-
-// let commission_hidden = document.getElementById('transfer-convert');
-
-// commission_hidden.onmouseover = function (event) {
-//     $("#transfer-commission-block").addClass("hidden");
-// }
-
-// commission_hidden.onmouseleave = function (event) {
-//     $("#transfer-commission-block").removeClass("hidden");
-// }
-
-// $('#transfer-convert').on('input', function () {
-
-//     $('#transfer-commission').addClass("bg-gray-100").attr('disabled', 'disabled');
-
-// }) 
-
-
-
-
 function disableCommission() {
 
     let element = document.getElementById("transfer-convert");
@@ -317,8 +344,11 @@ function disableCommission() {
 
 function clearFormConsumption() {
     document.getElementById('consumption-sum').value = null;
+    $('#consumption-account').empty();
     document.getElementById('consumption-rate').value = null;
+    $('#consumption-expense').empty();
     document.getElementById('consumption-note').value = "";
+    cuurentDate();
 }
 
 function clearFormTransfer() {
@@ -328,19 +358,59 @@ function clearFormTransfer() {
     document.getElementById('transfer-rate').value = null;
     document.getElementById('transfer-commission').value = "";
     document.getElementById('transfer-note').value = "";
+    $('#transfer-from-account').empty();
+    $('#transfer-to-account').empty();
+    cuurentDate();
 }
 
+function hide_button() {
+    $('#consumption-button').addClass("hidden").attr('disabled', 'disabled');
+    $('#transfer-button').addClass("hidden").attr('disabled', 'disabled');
+}
+function show_button() {
+    $('#consumption-button').removeClass("hidden").removeAttr('disabled', 'disabled');
+    $('#transfer-button').removeClass("hidden").removeAttr('disabled', 'disabled');
+}
 
+function cuurentDate() {
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    let today = year + "-" + month + "-" + day;
+
+    document.getElementById('consumption-date').value = today;
+    document.getElementById('transfer-date').value = today;
+    document.getElementById('lids-date').value = today;
+}
+
+//$("#block1").addClass("hidden")
 $(function rdBtn() {
+    $("#lids").on('click', function () {
+        $("#lids-block").show("slow");
+        $("#block1").hide();
+        $("#block2").hide();
+
+    })
+
     $("#consumption").on('click', function () {
+        $("#block1").removeClass("hidden");
+        $("#lids-block").hide();
         $("#block2").hide();
         $("#block1").show("slow");
         $("#btnblock2").hide();
         $("#btnblock1").show();
+        //$('#transfer-commission').removeClass("bg-gray-100").removeAttr('disabled', 'disabled');
 
     })
 
     $("#transfer").on('click', function () {
+        $("#lids-block").hide();
         $("#block1").hide();
         $("#block2").show("slow");
         $("#btnblock1").hide();
