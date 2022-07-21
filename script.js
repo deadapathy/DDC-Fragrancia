@@ -89,6 +89,73 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('#lids-channel').select2({
+        ajax: {
+            url: 'getChannel.php',
+            dataType: "json",
+            type: "post",
+            delay: 5,
+            data: function (params) {
+                return {
+                    searchTerm: params.term,
+                };
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('#lids-manager').select2({
+        ajax: {
+            url: 'get_Manager.php',
+            dataType: "json",
+            type: "post",
+            delay: 5,
+            data: function (params) {
+                return {
+                    searchTerm: params.term,
+                };
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        }
+    });
+});
+
+function lids_sendData() {
+    let lids_channel = $('#lids-channel :selected').text();
+    let telephone = document.getElementById('lids-telephone').value;
+    let lids_manager = $('#lids-manager :selected').text();
+    let lids_date = document.getElementById('lids-date').value;
+
+    let lids_array = [[lids_channel, telephone, lids_manager, lids_date]]
+
+    hide_button();
+    $.ajax({
+        url: 'lids_sendData.php',
+        method: 'post',
+        dataType: 'json',
+        data: { lids_array: lids_array },
+
+        success: function (data) {
+            alert(data);
+        }
+    });
+    clearFormLids();
+    show_button();
+}
+
 function consumption_getMaxId() {
     hide_button();
     let temp_id = 1;
@@ -99,8 +166,6 @@ function consumption_getMaxId() {
 
         success: function (data) {
             $.id = Number(data[0]) + temp_id;
-            console.log(data)
-            //id = Number(data[0]) + 1;
             consumption_sendData();
             clearFormConsumption();
             show_button();
@@ -109,11 +174,9 @@ function consumption_getMaxId() {
 }
 
 function consumption_sendData() {
-    //console.log("Вне функции:", $.id)
     let consumption_sum = (document.getElementById('consumption-sum').value).replace(/\s/g, '') * -1;
     let consumption_date = document.getElementById('consumption-date').value
     let consumption_account = $('#consumption-account :selected').text();
-    // let consumption_currency = document.getElementById('consumption-currency').value
     let consumption_rate = document.getElementById('consumption-rate').value
     let consumption_expense = $('#consumption-expense :selected').text();
     let consumption_note = document.getElementById('consumption-note').value
@@ -130,9 +193,6 @@ function consumption_sendData() {
             alert(data);
         }
     });
-    //$('#btnblock1').addClass("hidden").attr('disabled', 'disabled');
-    //clearFormConsumption();
-    //$('#btnblock1').removeClass("hidden").removeAttr('disabled', 'disabled');
 }
 
 function transfer_getMaxId() {
@@ -145,7 +205,6 @@ function transfer_getMaxId() {
 
         success: function (data) {
             $.id = Number(data[0]) + temp_id;
-            //id = Number(data[0]) + 1;
             transfer_sendData();
             clearFormTransfer();
             show_button();
@@ -257,11 +316,6 @@ $('#transfer-from-account').on('select2:select', function (e) {
             let sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
             let sum_convert = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
             document.getElementById('transfer-rate').value = (parseFloat(sum) / parseFloat(sum_convert)).toFixed(2);
-
-            if (isNaN(sum) || isNaN(sum_convert)) {
-                sum.innerHTML = 'Неверный ввод данных';
-                sum_convert.innerHTML = 'Неверный ввод данных';
-            }
         })
 
         let el1 = document.getElementById('transfer-sum');
@@ -269,12 +323,6 @@ $('#transfer-from-account').on('select2:select', function (e) {
             let sum = (document.getElementById('transfer-sum').value).replace(/\s/g, '');
             let sum_convert = (document.getElementById('transfer-convert').value).replace(/\s/g, '');
             document.getElementById('transfer-rate').value = (parseFloat(sum) / parseFloat(sum_convert)).toFixed(2);
-
-            if (isNaN(sum) || isNaN(sum_convert)) {
-                sum.innerHTML = 'Неверный ввод данных';
-                sum_convert.innerHTML = 'Неверный ввод данных';
-            }
-
         })
     } else if (transfer_from_account.id == 8 || 9) {
         let el = document.getElementById('transfer-convert');
@@ -342,6 +390,13 @@ function disableCommission() {
     }
 }
 
+function clearFormLids() {
+    $('#lids-channel').empty();
+    document.getElementById('lids-telephone').value = null;
+    $('#lids-manager').empty();
+    cuurentDate();
+}
+
 function clearFormConsumption() {
     document.getElementById('consumption-sum').value = null;
     $('#consumption-account').empty();
@@ -364,12 +419,14 @@ function clearFormTransfer() {
 }
 
 function hide_button() {
-    $('#consumption-button').addClass("hidden").attr('disabled', 'disabled');
-    $('#transfer-button').addClass("hidden").attr('disabled', 'disabled');
+    $('#lids-button').hide()
+    $('#consumption-button').hide();
+    $('#transfer-button').hide();
 }
 function show_button() {
-    $('#consumption-button').removeClass("hidden").removeAttr('disabled', 'disabled');
-    $('#transfer-button').removeClass("hidden").removeAttr('disabled', 'disabled');
+    $('#lids-button').show("slow");
+    $('#consumption-button').show("slow");
+    $('#transfer-button').show("slow");
 }
 
 function cuurentDate() {
@@ -389,13 +446,14 @@ function cuurentDate() {
     document.getElementById('lids-date').value = today;
 }
 
-//$("#block1").addClass("hidden")
 $(function rdBtn() {
     $("#lids").on('click', function () {
         $("#lids-block").show("slow");
         $("#block1").hide();
         $("#block2").hide();
-
+        $("#btnblock1").hide();
+        $("#btnblock2").hide();
+        $("#btnblock").show();
     })
 
     $("#consumption").on('click', function () {
@@ -404,9 +462,8 @@ $(function rdBtn() {
         $("#block2").hide();
         $("#block1").show("slow");
         $("#btnblock2").hide();
+        $("#btnblock").hide();
         $("#btnblock1").show();
-        //$('#transfer-commission').removeClass("bg-gray-100").removeAttr('disabled', 'disabled');
-
     })
 
     $("#transfer").on('click', function () {
@@ -414,6 +471,7 @@ $(function rdBtn() {
         $("#block1").hide();
         $("#block2").show("slow");
         $("#btnblock1").hide();
+        $("#btnblock").hide();
         $("#btnblock2").show("slow");
     })
 
