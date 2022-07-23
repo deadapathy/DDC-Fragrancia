@@ -1,10 +1,9 @@
-disableCommission();
 cuurentDate();
 
 $(document).ready(function () {
     $('#consumption-account').select2({
         ajax: {
-            url: 'get_payment_category.php',
+            url: 'script/get_payment_category.php',
             dataType: "json",
             type: "post",
             delay: 5,
@@ -26,7 +25,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#consumption-expense').select2({
         ajax: {
-            url: 'get_cf_category.php',
+            url: 'script/get_cf_category.php',
             dataType: "json",
             type: "post",
             delay: 5,
@@ -48,7 +47,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#transfer-from-account').select2({
         ajax: {
-            url: 'get_payment_category.php',
+            url: 'script/get_payment_category.php',
             dataType: "json",
             type: "post",
             delay: 5,
@@ -70,7 +69,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#transfer-to-account').select2({
         ajax: {
-            url: 'get_payment_category.php',
+            url: 'script/get_payment_category.php',
             dataType: "json",
             type: "post",
             delay: 5,
@@ -92,7 +91,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#lids-channel').select2({
         ajax: {
-            url: 'getChannel.php',
+            url: 'script/getChannel.php',
             dataType: "json",
             type: "post",
             delay: 5,
@@ -114,7 +113,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#lids-manager').select2({
         ajax: {
-            url: 'get_Manager.php',
+            url: 'script/get_Manager.php',
             dataType: "json",
             type: "post",
             delay: 5,
@@ -143,7 +142,7 @@ function lids_sendData() {
 
     hide_button();
     $.ajax({
-        url: 'lids_sendData.php',
+        url: 'script/lids_sendData.php',
         method: 'post',
         dataType: 'json',
         data: { lids_array: lids_array },
@@ -160,7 +159,7 @@ function consumption_getMaxId() {
     hide_button();
     let temp_id = 1;
     $.ajax({
-        url: 'getMaxId.php',
+        url: 'script/getMaxId.php',
         method: 'GET',
         dataType: 'json',
 
@@ -184,7 +183,7 @@ function consumption_sendData() {
         consumption_rate, consumption_expense, consumption_note]];
 
     $.ajax({
-        url: 'consumption_sendData.php',
+        url: 'script/consumption_sendData.php',
         method: 'post',
         dataType: 'json',
         data: { consumption_array: consumption_array },
@@ -199,7 +198,7 @@ function transfer_getMaxId() {
     hide_button();
     let temp_id = 1;
     $.ajax({
-        url: 'getMaxId.php',
+        url: 'script/getMaxId.php',
         method: 'GET',
         dataType: 'json',
 
@@ -224,7 +223,7 @@ function transfer_sendData() {
         consumption_rate, consumption_expense, transfer_note]]
 
     $.ajax({
-        url: 'transfer_sendData.php',
+        url: 'script/transfer_sendData.php',
         method: 'post',
         dataType: 'json',
         data: { transfer_array: transfer_array },
@@ -248,7 +247,7 @@ function transfer_sendData() {
             consumption_rate1, consumption_expense1, transfer_note1]];
 
         $.ajax({
-            url: 'transfer_Update1.php',
+            url: 'script/transfer_Update1.php',
             method: 'post',
             dataType: 'json',
             data: { transfer_array_update: transfer_array_update },
@@ -269,7 +268,7 @@ function transfer_sendData() {
             consumption_rate1, consumption_expense1, transfer_note1]];
 
         $.ajax({
-            url: 'transfer_Update1.php',
+            url: 'script/transfer_Update1.php',
             method: 'post',
             dataType: 'json',
             data: { transfer_array_update: transfer_array_update },
@@ -293,7 +292,7 @@ function transfer_sendData() {
 
     if (commission != "" || 0) {
         $.ajax({
-            url: 'transfer_Update2.php',
+            url: 'script/transfer_Update2.php',
             method: 'post',
             dataType: 'json',
             data: { transfer_array_commission: transfer_array_commission },
@@ -379,16 +378,16 @@ $(function ($) {
     digits_int('#transfer-commission');
 });
 
-function disableCommission() {
-
-    let element = document.getElementById("transfer-convert");
-
-    if (element.text != "" || 0) {
-        element.addEventListener('input', function () {
-            $('#transfer-commission').addClass("bg-gray-100").attr('disabled', 'disabled');
-        })
+$('#transfer-convert').keyup(function () {
+    var len = $(this).val().length;
+    if (len >= 1) {
+        $('#transfer-commission').addClass("bg-gray-100").attr('disabled', 'disabled');
+        document.getElementById('transfer-commission').value = 0;
     }
-}
+    else {
+        $('#transfer-commission').removeClass("bg-gray-100").removeAttr('disabled', 'disabled');
+    }
+});
 
 function clearFormLids() {
     $('#lids-channel').empty();
@@ -446,9 +445,10 @@ function cuurentDate() {
     document.getElementById('lids-date').value = today;
 }
 
+
 $(function rdBtn() {
     $("#lids").on('click', function () {
-        $("#lids-block").show("slow");
+        $("#lids-block").show();
         $("#block1").hide();
         $("#block2").hide();
         $("#btnblock1").hide();
@@ -460,7 +460,7 @@ $(function rdBtn() {
         $("#block1").removeClass("hidden");
         $("#lids-block").hide();
         $("#block2").hide();
-        $("#block1").show("slow");
+        $("#block1").show();
         $("#btnblock2").hide();
         $("#btnblock").hide();
         $("#btnblock1").show();
@@ -469,10 +469,10 @@ $(function rdBtn() {
     $("#transfer").on('click', function () {
         $("#lids-block").hide();
         $("#block1").hide();
-        $("#block2").show("slow");
+        $("#block2").show();
         $("#btnblock1").hide();
         $("#btnblock").hide();
-        $("#btnblock2").show("slow");
+        $("#btnblock2").show();
     })
 
 });

@@ -9,6 +9,7 @@ $dbName = "fragrancia";
 $pass = "root";
 
 $dbconn = mysqli_connect($ip, $userName, $pass, $dbName) or die("Unable to connect to DB");
+mysqli_set_charset($dbconn,'utf8');
 
 foreach($sendData as $element){
 

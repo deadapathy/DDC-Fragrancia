@@ -1,12 +1,13 @@
 <?php
 ini_set('display_errors', 1);
+
 $ip = "localhost";
 $userName = "root";
 $dbName = "fragrancia";
 $pass = "root";
 
 $dbconn = mysqli_connect($ip, $userName, $pass, $dbName) or die("Unable to connect to DB");
-
+mysqli_set_charset($dbconn,'utf8');
 
 
 // $sql = "SELECT * FROM payments_category_db";
